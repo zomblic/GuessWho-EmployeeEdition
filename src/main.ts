@@ -2,6 +2,13 @@ import inquirer from 'inquirer';
 import colors from 'colors';
 import { Pool } from 'pg';
 
+
+
+console.log(colors.rainbow('WELCOME TO EMPLOYEE TRACKER!'));
+console.log(colors.rainbow('LET\'S GET STARTED!'));
+console.log(colors.rainbow('PLEASE SELECT AN OPTION FROM THE MENU BELOW.'));
+
+
 const pool = new Pool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
