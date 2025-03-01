@@ -1,13 +1,19 @@
 import inquirer from 'inquirer';
+import dotenv from 'dotenv';
 import colors from 'colors';
 import pkg from 'pg';
 const { Pool } = pkg;
 
 
+dotenv.config();
 
 console.log(colors.rainbow('WELCOME TO EMPLOYEE TRACKER!'));
 console.log(colors.rainbow('LETS GET STARTED!'));
 console.log(colors.rainbow('PLEASE SELECT AN OPTION FROM THE MENU BELOW.'));
+
+console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
+console.log("Type of DB_PASSWORD:", typeof process.env.DB_PASSWORD);
+
 
 const pool = new Pool({
   user: process.env.DB_USER,
