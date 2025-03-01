@@ -1,11 +1,12 @@
 import inquirer from 'inquirer';
 import colors from 'colors';
-import { Pool } from 'pg';
+import pkg from 'pg';
+const { Pool } = pkg;
 
 
 
 console.log(colors.rainbow('WELCOME TO EMPLOYEE TRACKER!'));
-console.log(colors.rainbow('LET\'S GET STARTED!'));
+console.log(colors.rainbow('LETS GET STARTED!'));
 console.log(colors.rainbow('PLEASE SELECT AN OPTION FROM THE MENU BELOW.'));
 
 const pool = new Pool({
