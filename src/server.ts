@@ -97,7 +97,7 @@ const addDepartment = async () => {
 
   const { departmentName } = answers;
   await pool.query(
-    `INSERT INTO department (name) VALUES ($1)`,
+    `INSERT INTO department (name) VALUES ($1) ON CONLICT (name) DO NOTHING;`,
     [departmentName]
   );
   console.log('Department inserted successfully!');
