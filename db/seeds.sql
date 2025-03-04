@@ -15,9 +15,9 @@ VALUES ('Graphic Designer', 80000, 1),
   
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ('John', 'Doe', 1, 5),
-       ('Jane', 'Doe', 2, 5),
-       ('John', 'Smith', 3, 5),
-       ('Jane', 'Smith', 4, 5),
-       ( 'John', 'Johnson', 5, null);
+VALUES ('Karl', 'Heisenberg', 1, 5),
+       ('Ethan', 'Winters', 2, 5),
+       ('Leon', 'Kennedy', 3, 5),
+       ('Chris', 'Redfield', 4, 5),
+       ('Alcina', 'Dimitrescu', 5, null);
       

@@ -60,7 +60,7 @@ const mainMenu = async () => {
     case 'ADD AN EMPLOYEE':
       await addEmployee();
       break;
-    case 'UPDATE AN EMPLOYEE ROLE':
+    case 'UPDATE AN EMPLOYEE':
       await updateEmployee();
       break;
     case 'EXIT':
@@ -100,7 +100,7 @@ const addDepartment = async () => {
     `INSERT INTO department (name) VALUES ($1) ON CONLICT (name) DO NOTHING;`,
     [departmentName]
   );
-  console.log('Department inserted successfully!');
+  console.log(colors.green('Department inserted successfully!'));
 };
 
 const addRole = async () => {
@@ -181,21 +181,35 @@ const addEmployee = async () => {
     `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)`,
     [EmployeeFirstName, EmployeeLastName, EmployeeRole, EmployeeManager]
   );
-  console.log('Employee inserted successfully!');
+  console.log(colors.zalgo('Employee inserted successfully!'));
 };
 
 const updateEmployee = async () => {
-  const employees = await pool.query('SELECT id, first_name, last_name FROM employee');
+  const employees = await pool.query('SELECT first_name, last_name, role_id, manager_id FROM employee');
   const employeeChoices = employees.rows.map(employee => ({
     name: `${employee.first_name} ${employee.last_name}`,
     value: employee.id,
   }));
+  
+const departments = await pool.query('SELECT id, name FROM department');
+  const departmentChoices = departments.rows.map(department => ({
+    name: department.name,
+    value: department.id,
+  }));
+  console.log(departmentChoices);
 
+  const managerChoices = employees.rows.map(employee => ({
+    name: `${employee.first_name} ${employee.last_name}`,
+    value: employee.id}));
+    console.log(managerChoices);
+    
   const roles = await pool.query('SELECT id, title FROM role');
   const roleChoices = roles.rows.map(role => ({
     name: role.title,
     value: role.id,
   }));
+console.log(roles);
+
 
   const answers = await inquirer.prompt([
     {
@@ -207,18 +221,20 @@ const updateEmployee = async () => {
     {
       type: 'list',
       name: 'updateRole',
-      message: colors.magenta('WHAT IS THE EMPLOYEE NEW ROLE?'),
+      message: colors.magenta('WHAT IS THEIR NEW ROLE?'),
       choices: roleChoices,
     },
     {
-      type: 'input',
+      type: 'list',
       name: 'updateManager',
-      message: colors.magenta('WHO IS THE EMPLOYEE NEW MANAGER?'),
+      message: colors.magenta('WHO IS THEIR NEW MANAGER?'),
+      choices: managerChoices,
     },
     {
-      type: 'input',
+      type: 'list',
       name: 'updateDepartment',
-      message: colors.magenta('WHAT IS THE EMPLOYEE NEW DEPARTMENT?'),
+      message: colors.magenta('WHAT IS THEIR NEW DEPARTMENT?'),
+      choices: departmentChoices,
     },
     {
       type: 'input',
@@ -229,9 +245,9 @@ const updateEmployee = async () => {
 
   const { updateEmployee, updateRole, updateManager, updateDepartment, updateSalary } = answers;
   await pool.query(
-    `UPDATE employee SET role_id = $1, manager_id = $2, department_id = $3, salary = $4 WHERE id = $5`,
-    [updateRole, updateManager, updateDepartment, updateSalary, updateEmployee]
+    `UPDATE employee SET role_id = $1, manager_id = $2 WHERE id = $3`, [updateRole, updateManager, updateEmployee]
   );
+  await pool.query(`UPDATE role set department_id = $1, salary = $2 WHERE id = $3`, [updateDepartment, updateSalary, updateRole]);
   console.log('Employee updated successfully!');
 };
 
