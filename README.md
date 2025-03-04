@@ -17,9 +17,18 @@
   [![Watch the video]](https://raw.githubusercontent.com/zomblic/Guesswho-employeeedition/main/video/Example.mov)
 
   
-  Are you curious about your weather? Planning an amazing LARPing event, but need to know last minute forecast? Then this is the website for you! Five day forecast that is able to mostly accurately predict your weather!
+  So, you're sitting at your desk, working and then, you get the urge. The urge to ensure that everything is where it should be. You load up the GuessWho-EmployeeEditiona and decide to:
 
-Just type in the city, cross your fingers and see what weather is summoned!
+  1. view departments
+  2. view employees
+  3. view roles
+  4. add department
+  5. add role
+  6. add employee
+  and...
+  7. update employee
+
+  You use these seven options and have the ability to wreck havoc in your database. However, you decide not too. 
 
 
   ## <span style="color:rgb(255, 0, 153);">License</span>
